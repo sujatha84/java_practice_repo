@@ -58,17 +58,17 @@ public class StreamsExmpl1 {
 		
 		//Print employee details whose age is greater than 28
 		empList.stream().filter(e -> e.age() > 28).toList().forEach(System.out::println);;
-		/**
+		
 		//Find maximum age of employee.
-		Employee empMaxAge = empList.stream().max(Comparator.comparingInt(Employee::getAge)).orElse(null);
+		Employee empMaxAge = empList.stream().max(Comparator.comparingInt(Employee::age)).orElse(null);
 		System.out.println("Max Age of employee " + empMaxAge);
 		
 		//Print Average age of Male and Female Employees.
-		Map<String, Double> empMap = empList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingInt(Employee::getAge)));
+		Map<String, Double> empMap = empList.stream().collect(Collectors.groupingBy(Employee::gender, Collectors.averagingInt(Employee::age)));
 		System.out.println("Avg age of male and female emp " + empMap);
 		
 		//Print the number of employees in each department.
-		Map<String, Long> empDeptMap = empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting()));
+		Map<String, Long> empDeptMap = empList.stream().collect(Collectors.groupingBy(Employee::deptName, Collectors.counting()));
 		System.out.println("number of employees in each department " + empDeptMap);
 		for(Map.Entry<String, Long> entry : empDeptMap.entrySet()) 
 		{
@@ -76,24 +76,26 @@ public class StreamsExmpl1 {
 		}
 		
 		//longest serving employees in the organization
-		Optional<Employee> longEmp = empList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst();
+		Optional<Employee> longEmp = empList.stream().sorted(Comparator.comparingInt(Employee::yearOfJoining)).findFirst();
 		if(longEmp.isPresent()) System.out.println(longEmp.get());
 		
 		//longest serving employee in each department
-		Map<String, Optional<Employee>> longserEmp = empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.minBy(Comparator.comparingInt(Employee::getYearOfJoining))));
+		Map<String, Optional<Employee>> longserEmp = empList.stream().collect(Collectors.groupingBy(Employee::deptName, Collectors.minBy(Comparator.comparingInt(Employee::yearOfJoining))));
 		for(Map.Entry<String, Optional<Employee>> entry : longserEmp.entrySet()) 
 		{
 		   System.out.println(entry.getKey() + " : " + entry.getValue());
 		}
 
-		empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.minBy(Comparator.comparing(Employee::getYearOfJoining)))).forEach((dept, empOpt) -> empOpt.ifPresent(emp -> System.out.println(dept + " -> " + emp.getName() + " (DOJ: " + emp.getYearOfJoining() + ")")));
+		empList.stream()
+		.collect(Collectors.groupingBy(Employee::deptName, Collectors.minBy(Comparator.comparing(Employee::yearOfJoining))))
+		.forEach((dept, empOpt) -> empOpt.ifPresent(emp -> System.out.println(dept + " -> " + emp.name() + " (DOJ: " + emp.yearOfJoining() + ")" )));
 		
 		//second highest salary
-		Employee secHigest = empList.stream().sorted(Comparator.comparingLong(Employee::getSalary).reversed()).skip(1).findFirst().orElse(null);
-		System.out.println(secHigest.getName());
+		Employee secHigest = empList.stream().sorted(Comparator.comparingLong(Employee::salary).reversed()).skip(1).findFirst().orElse(null);
+		System.out.println(secHigest.name());
 		
 		//Top 3 highest salaries
-		empList.stream().sorted(Comparator.comparingLong(Employee::getSalary).reversed()).limit(3).forEach(System.out::println);
+		empList.stream().sorted(Comparator.comparingLong(Employee::salary).reversed()).limit(3).forEach(System.out::println);
 		
 
 		Integer a = 123, b= 123, c = 129, d = 129;
@@ -112,7 +114,7 @@ public class StreamsExmpl1 {
 	                            .map(entry -> entry.getKey())
 	                            .findFirst()
 	                            .get();
-	    System.out.println(result);   **/
+	    System.out.println(result);   
 
 	}
 
