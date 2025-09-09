@@ -17,7 +17,8 @@ public class SingletonDP {
 	/** 
 	Singleton Design Pattern:
 	A class implemented with the Singleton pattern typically ensures that only one instance
-	of that class exists per ClassLoader (and thus, usually per Java Virtual Machine - JVM). This is enforced by the class itself, often through a private constructor and a static getInstance() method.
+	of that class exists per ClassLoader (and thus, usually per Java Virtual Machine - JVM). This is enforced by the 
+	class itself, often through a private constructor and a static getInstance() method.
 	Spring Singleton Bean:
 	A Spring singleton bean ensures that only one instance of that bean exists per 
 	Spring ApplicationContext. If multiple Spring ApplicationContexts are running within 
